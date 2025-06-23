@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+pipenv/
+*.egg-info/
+
+# Environment variables
+.env
+
+# SQLite / PostgreSQL
+*.db
+*.sqlite3
+
+# Flask & Alembic
+instance/
+migrations/versions/
+
+# OS / IDE files
+.DS_Store
+.vscode/
+.idea/
+
+# Python test cache
+.pytest_cache/
+coverage/
+htmlcov/
+
+# Postman temp files
+*.postman_collection.json~
+
+# Logs
+*.log

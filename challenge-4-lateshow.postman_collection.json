@@ -1,0 +1,186 @@
+{
+    "info": {
+        "_postman_id": "late-show-api-collection-id",
+        "name": "challenge-4-lateshow",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Register",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"{{newUsername}}\",\n    \"password\": \"{{newPassword}}\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/register",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "register"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Login",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "let json = pm.response.json();",
+                            "pm.environment.set('token', json.access_token);"
+                        ]
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/login",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "login"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Guests",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseURL}}/guests",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "guests"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Episodes",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseURL}}/episodes",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "episodes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "EpisodeById",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseURL}}/episodes/1",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "episodes",
+                        "1"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Episode (Protected)",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/episodes/1",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "episodes",
+                        "1"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create Appearance (Protected)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_id\": 1,\n    \"episode_id\": 2,\n    \"rating\": 5\n}"
+                },
+                "url": {
+                    "raw": "{{baseURL}}/appearances",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "appearances"
+                    ]
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseURL",
+            "value": "http://127.0.0.1:5000",
+            "type": "default"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "default"
+        }
+    ]
+}
